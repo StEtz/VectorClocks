@@ -1,32 +1,36 @@
+package th.bingen.movs.vectorclocks.impl.clock;
+
 import static java.lang.Math.max;
 
 import java.util.HashMap;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 
-@ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Clock {
+public class VectorClock {
 
   @Getter
   private HashMap<String, Integer> counterMap;
 
-  public static Clock create(HashMap<String, Integer> p1) {
-    var c = new Clock();
+  public static VectorClock create(HashMap<String, Integer> p1) {
+    var c = new VectorClock();
     c.counterMap = p1;
     return c;
   }
 
 
-  public Clock incCounterForProcess(String name) {
+  public VectorClock incCounterForProcess(String name) {
+    if (!counterMap.containsKey(name)) {
+      throw new IllegalArgumentException();
+    }
+
     counterMap.put(name, counterMap.get(name) + 1);
     return this;
   }
 
-  public Clock updateClock(Clock newClock) {
+  public VectorClock updateClockWith(VectorClock newClock) {
 
     newClock.counterMap.keySet()
         .forEach(key ->
@@ -37,7 +41,7 @@ public class Clock {
     return this;
   }
 
-  public Clock clone() {
-    return Clock.create(new HashMap<>(counterMap));
+  public VectorClock clone() {
+    return VectorClock.create(new HashMap<>(counterMap));
   }
 }

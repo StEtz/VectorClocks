@@ -1,30 +1,11 @@
+package th.bingen.movs.vectorclocks.system;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor(staticName = "create")
-@Getter
-class Task {
-
-  private final String id;
-  private final String source;
-  private final List<String> destinations = new ArrayList<>();
-
-  public void addReceiver(String p) {
-    destinations.add(p);
-  }
-
-  public boolean containsTaskFromSource(String n) {
-    return source.equals(n);
-  }
-
-  public boolean hasId(String id) {
-    return id.equals(id);
-  }
-}
+import th.bingen.movs.vectorclocks.impl.helper.Process;
 
 @RequiredArgsConstructor(staticName = "withProcesses")
 public class MySystem {
@@ -55,7 +36,6 @@ public class MySystem {
   }
 
   public void trigger(String name) {
-
     get(name).trigger();
   }
 

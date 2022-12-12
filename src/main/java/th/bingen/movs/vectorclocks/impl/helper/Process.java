@@ -1,16 +1,17 @@
+package th.bingen.movs.vectorclocks.impl.helper;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import th.bingen.movs.vectorclocks.impl.clock.VectorClock;
 
 @RequiredArgsConstructor(staticName = "create")
-@ToString
-@Getter
+
 public class Process {
 
   private final String name;
 
-
-  private final Clock clock;
+  @Getter
+  private final VectorClock clock;
 
   public boolean isCalled(String name) {
     return this.name.equals(name);
@@ -25,10 +26,11 @@ public class Process {
     clock.incCounterForProcess(name);
   }
 
+
   public void recieveMessage(Message msg) {
     var sendersClock = msg.getClock();
 
     trigger();
-    clock.updateClock(sendersClock);
+    clock.updateClockWith(sendersClock);
   }
 }
