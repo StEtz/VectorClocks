@@ -5,23 +5,34 @@ import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * This class represents a task which is executed in the{@link MySystem} class
+ */
 @RequiredArgsConstructor(staticName = "create")
-
+@Getter
 public class Task {
 
+  /**
+   * The id of the task
+   */
   private final String id;
 
-  @Getter
+  /**
+   * The name of the sender process
+   */
   private final String source;
 
-  @Getter
+  /**
+   * The list of recipients
+   */
   private final List<String> destinations = new ArrayList<>();
 
-  public void addReceiver(String p) {
-    destinations.add(p);
-  }
-
-  public boolean hasId(String id) {
-    return id.equals(id);
+  /**
+   * Method for adding another receiver
+   *
+   * @param name The name of the receiving process
+   */
+  public void addReceiver(String name) {
+    destinations.add(name);
   }
 }

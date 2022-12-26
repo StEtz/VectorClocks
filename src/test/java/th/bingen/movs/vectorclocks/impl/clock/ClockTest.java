@@ -56,7 +56,7 @@ class ClockTest {
 
     @Test
     @DisplayName("... when updating a vector clock with another, expect that the change is reflected in ")
-    void increaseByOne() {
+    void updateReceiversVectorClock() {
       vectorClock1.updateClockWith(vectorClock2);
       assertThat(vectorClock1.getCounterMap()).containsAllEntriesOf(vectorClock2.getCounterMap());
     }
@@ -67,7 +67,7 @@ class ClockTest {
   @DisplayName("When duplicating vector clocks....")
   class ClockCreationTests {
 
-    private final VectorClock vectorClock1 = VectorClock.create(new HashMap<>() {{
+    private final VectorClock vectorClock = VectorClock.create(new HashMap<>() {{
       put("P1", 0);
       put("P2", 0);
       put("P3", 0);
@@ -75,13 +75,13 @@ class ClockTest {
 
     @BeforeEach
     void increaseByOne() {
-      vectorClock1.incCounterForProcess("P2");
+      vectorClock.incCounterForProcess("P2");
     }
 
     @Test
     @DisplayName("... by using the clone method, expect that the change is reflected in the new clock")
     void clockAClock() {
-      assertThat(vectorClock1.clone().getCounterMap()).containsAllEntriesOf(vectorClock1.getCounterMap());
+      assertThat(vectorClock.clone().getCounterMap()).containsAllEntriesOf(vectorClock.getCounterMap());
     }
   }
 }

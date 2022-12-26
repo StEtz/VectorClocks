@@ -29,6 +29,12 @@
       <version>3.23.1</version>
     </dependency>
 
+    <dependency>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <groupId>org.mockito</groupId>
+      <scope>test</scope>
+      <version>3.12.4</version>
+    </dependency>
   </dependencies>
   <groupId>org.example</groupId>
   <modelVersion>4.0.0</modelVersion>
