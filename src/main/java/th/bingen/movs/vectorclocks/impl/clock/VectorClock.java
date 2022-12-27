@@ -1,25 +1,25 @@
 package th.bingen.movs.vectorclocks.impl.clock;
 
-import static java.lang.Math.min;
+import static java.lang.Math.max;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * The Implementation of our VectorClock
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
 public class VectorClock {
 
   /**
    * This map holds the actual state for each known process
    */
-  @Getter
-  private HashMap<String, Integer> counterMap;
+  private HashMap<String, Integer> counterMap = new HashMap<>();
 
   /**
    * Factory method for creating an instance of our Vector clock
@@ -33,6 +33,19 @@ public class VectorClock {
     processList.forEach(processName -> hm.put(processName, 0));
     c.counterMap = hm;
     return c;
+  }
+
+  /**
+   * Display method for showing the content of the vector clock
+   */
+  public void display() {
+
+    System.out.println(
+        counterMap.keySet()
+            .stream()
+            .map(processName -> String.valueOf(counterMap.get(processName)))
+            .collect(Collectors.joining(" "))
+    );
   }
 
   /**
@@ -60,7 +73,7 @@ public class VectorClock {
 
     newClock.counterMap.keySet()
         .forEach(key ->
-            counterMap.put(key, min(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
+            counterMap.put(key, max(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
             )
         );
 
@@ -73,6 +86,8 @@ public class VectorClock {
    * @return the new {@link VectorClock} instance
    */
   public VectorClock clone() {
-    return VectorClock.create(counterMap.keySet().stream().collect(Collectors.toList()));
+    VectorClock vc = new VectorClock();
+    vc.counterMap.putAll(counterMap);
+    return vc;
   }
 }

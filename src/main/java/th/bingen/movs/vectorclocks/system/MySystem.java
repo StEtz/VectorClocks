@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import th.bingen.movs.vectorclocks.impl.helper.Process;
 
@@ -109,24 +108,8 @@ public class MySystem {
    * Helper method for displaying the processes and their internal state
    */
   public void displayProcesses() {
-    List<List<Integer>> matrix = new ArrayList<>(List.of());
     processesList.forEach(process -> {
-      matrix.add(process.getClock().getCounterMap().values().stream().collect(Collectors.toList()));
+      process.display();
     });
-
-    List<String> l = new ArrayList();
-    l.add("");
-    for (int x = 0; x < matrix.size(); x++) {
-      l.add("P" + x);
-    }
-    System.out.println(l.stream().collect(Collectors.joining("\t")));
-
-    for (int x = 0; x < matrix.size(); x++) {
-      for (int y = 0; y < matrix.get(x).size(); y++) {
-        System.out.print("\t" + matrix.get(y).get(x) + "\t");
-      }
-      System.out.println();
-    }
-    System.out.println();
   }
 }

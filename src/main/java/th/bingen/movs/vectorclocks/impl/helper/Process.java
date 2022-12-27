@@ -64,4 +64,9 @@ public class Process {
     trigger();
     clock.updateClockWith(sendersClock);
   }
+
+  public void display() {
+    System.out.print(name + ": ");
+    clock.display();
+  }
 }

@@ -1,10 +1,10 @@
 package th.bingen.movs.vectorclocks.system;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -15,6 +15,15 @@ import th.bingen.movs.vectorclocks.impl.helper.Process;
 class SystemE2ETest {
 
   private final VectorClock vectorClock = VectorClock.create(List.of("P1", "P2", "P3"));
+
+  VectorClock setVectorClock(VectorClock vc, Map<String, Integer> config) {
+    config.keySet().forEach(processName -> {
+      for (int x = 0; x < config.get(processName); x++) {
+        vc.incCounterForProcess(processName);
+      }
+    });
+    return vc;
+  }
 
   @Nested
   @DisplayName(".... with one process which fails because ....")
@@ -57,24 +66,9 @@ class SystemE2ETest {
 
       system.displayProcesses();
 
-      assertThat(p1.getClock().getCounterMap()).containsAllEntriesOf(new HashMap<>() {{
-        put("P1", 3);
-        put("P2", 4);
-        put("P3", 0);
-      }});
-
-      assertThat(p2.getClock().getCounterMap()).containsAllEntriesOf(new HashMap<>() {{
-        put("P1", 0);
-        put("P2", 4);
-        put("P3", 0);
-      }});
-
-      assertThat(p3.getClock().getCounterMap()).containsAllEntriesOf(new HashMap<>() {{
-        put("P1", 2);
-        put("P2", 4);
-        put("P3", 5);
-      }});
-
+      assertEquals(p1.getClock(), setVectorClock(vectorClock.clone(), Map.of("P1", 3, "P2", 4)));
+      assertEquals(p2.getClock(), setVectorClock(vectorClock.clone(), Map.of("P2", 4)));
+      assertEquals(p3.getClock(), setVectorClock(vectorClock.clone(), Map.of("P1", 2, "P2", 4, "P3", 5)));
     }
   }
 }
