@@ -1,4 +1,4 @@
-package th.bingen.movs.vectorclocks.system;
+package th.bingen.movs.vectorclocks.system.helper;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

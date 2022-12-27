@@ -1,9 +1,10 @@
-package th.bingen.movs.vectorclocks.system;
+package th.bingen.movs.vectorclocks.system.helper;
 
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import th.bingen.movs.vectorclocks.system.MySystem;
 
 /**
  * This class represents a task which is executed in the{@link MySystem} class

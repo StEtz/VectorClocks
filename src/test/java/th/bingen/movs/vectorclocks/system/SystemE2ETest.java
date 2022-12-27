@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import th.bingen.movs.vectorclocks.impl.Process.Process;
 import th.bingen.movs.vectorclocks.impl.clock.VectorClock;
-import th.bingen.movs.vectorclocks.impl.helper.Process;
 
 @DisplayName("Doing an E2E test.... ")
 class SystemE2ETest {

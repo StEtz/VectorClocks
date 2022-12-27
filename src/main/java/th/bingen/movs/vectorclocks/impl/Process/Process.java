@@ -1,7 +1,8 @@
-package th.bingen.movs.vectorclocks.impl.helper;
+package th.bingen.movs.vectorclocks.impl.Process;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import th.bingen.movs.vectorclocks.impl.Process.helper.Message;
 import th.bingen.movs.vectorclocks.impl.clock.VectorClock;
 
 /**

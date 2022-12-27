@@ -1,4 +1,4 @@
-package th.bingen.movs.vectorclocks.impl.helper;
+package th.bingen.movs.vectorclocks.impl.Process.helper;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import th.bingen.movs.vectorclocks.impl.helper.Process;
+import th.bingen.movs.vectorclocks.impl.Process.Process;
+import th.bingen.movs.vectorclocks.system.helper.Task;
 
 /**
  * This class represents the system in which we are running our processes with our clocks

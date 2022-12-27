@@ -1,4 +1,4 @@
-package th.bingen.movs.vectorclocks.impl.helper;
+package th.bingen.movs.vectorclocks.impl.Process;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import th.bingen.movs.vectorclocks.impl.Process.helper.Message;
 import th.bingen.movs.vectorclocks.impl.clock.VectorClock;
 
 @ExtendWith(MockitoExtension.class)
