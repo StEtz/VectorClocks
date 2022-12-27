@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.util.HashMap;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,15 +13,16 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Vector clock tests")
 class ClockTest {
 
+
+  private static VectorClock createStandardVectorClock() {
+    return VectorClock.create(List.of("P1", "P2", "P3"));
+  }
+
   @Nested
   @DisplayName("For a created Vector clock....")
   class StandardClockTests {
 
-    private final VectorClock vectorClock = VectorClock.create(new HashMap<>() {{
-      put("P1", 0);
-      put("P2", 0);
-      put("P3", 0);
-    }});
+    private final VectorClock vectorClock = createStandardVectorClock();
 
     @Test
     @DisplayName("... when increasing an element by one, expect that the change is reflected in the internal map")
@@ -42,17 +43,9 @@ class ClockTest {
   @DisplayName("For multiple Vector clocks....")
   class ClockUpdateTests {
 
-    private final VectorClock vectorClock1 = VectorClock.create(new HashMap<>() {{
-      put("P1", 0);
-      put("P2", 0);
-      put("P3", 0);
-    }});
+    private final VectorClock vectorClock1 = createStandardVectorClock();
 
-    private final VectorClock vectorClock2 = VectorClock.create(new HashMap<>() {{
-      put("P1", 0);
-      put("P2", 2);
-      put("P3", 0);
-    }});
+    private final VectorClock vectorClock2 = createStandardVectorClock();
 
     @Test
     @DisplayName("... when updating a vector clock with another, expect that the change is reflected in ")
@@ -67,11 +60,7 @@ class ClockTest {
   @DisplayName("When duplicating vector clocks....")
   class ClockCreationTests {
 
-    private final VectorClock vectorClock = VectorClock.create(new HashMap<>() {{
-      put("P1", 0);
-      put("P2", 0);
-      put("P3", 0);
-    }});
+    private final VectorClock vectorClock = createStandardVectorClock();
 
     @BeforeEach
     void increaseByOne() {

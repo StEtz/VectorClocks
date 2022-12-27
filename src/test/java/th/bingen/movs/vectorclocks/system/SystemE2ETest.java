@@ -14,12 +14,7 @@ import th.bingen.movs.vectorclocks.impl.helper.Process;
 @DisplayName("Doing an E2E test.... ")
 class SystemE2ETest {
 
-  private final VectorClock vectorClock = VectorClock.create(new HashMap<>() {{
-                                                               put("P1", 0);
-                                                               put("P2", 0);
-                                                               put("P3", 0);
-                                                             }}
-  );
+  private final VectorClock vectorClock = VectorClock.create(List.of("P1", "P2", "P3"));
 
   @Nested
   @DisplayName(".... with one process which fails because ....")

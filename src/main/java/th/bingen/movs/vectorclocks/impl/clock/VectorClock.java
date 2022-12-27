@@ -1,8 +1,10 @@
 package th.bingen.movs.vectorclocks.impl.clock;
 
-import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +24,14 @@ public class VectorClock {
   /**
    * Factory method for creating an instance of our Vector clock
    *
-   * @param processMap A Map which contains an inital 0 for each known process
+   * @param processList A List which contains the names of the known processes
    * @return a new {@link VectorClock} instance
    */
-  public static VectorClock create(HashMap<String, Integer> processMap) {
+  public static VectorClock create(List<String> processList) {
     var c = new VectorClock();
-    c.counterMap = processMap;
+    HashMap<String, Integer> hm = new HashMap<>();
+    processList.forEach(processName -> hm.put(processName, 0));
+    c.counterMap = hm;
     return c;
   }
 
@@ -56,7 +60,7 @@ public class VectorClock {
 
     newClock.counterMap.keySet()
         .forEach(key ->
-            counterMap.put(key, max(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
+            counterMap.put(key, min(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
             )
         );
 
@@ -69,6 +73,6 @@ public class VectorClock {
    * @return the new {@link VectorClock} instance
    */
   public VectorClock clone() {
-    return VectorClock.create(new HashMap<>(counterMap));
+    return VectorClock.create(counterMap.keySet().stream().collect(Collectors.toList()));
   }
 }
