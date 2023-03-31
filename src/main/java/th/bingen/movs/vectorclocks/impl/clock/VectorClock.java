@@ -1,7 +1,5 @@
 package th.bingen.movs.vectorclocks.impl.clock;
 
-import static java.lang.Math.max;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,7 +71,7 @@ public class VectorClock {
 
     newClock.counterMap.keySet()
         .forEach(key ->
-            counterMap.put(key, max(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
+            counterMap.put(key, Integer.min(counterMap.getOrDefault(key, 0), newClock.counterMap.get(key))
             )
         );
 
